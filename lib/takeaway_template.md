@@ -34,11 +34,12 @@ The program will have three classes:
   Dish.price # returns the dish price as float
   Dish.add(dish_name, dish_price) # adds a dish (string) and price (float) within a hash. 
   
-  Menu.add_dish(dish_name, dish_price) # adds a dish to the list
+  Menu.add_dish # adds a dish to the list
   Menu.view_dish(dish_name) # returns the dish name and price
+  Menu.remove_dish(dish_name) # removes a dish from the list
   Menu.view_all_dishes # returns all dishes in a list
   
-  Receipt.add_to_order(dish_name, dish_price) # adds a dish to the order
+  Receipt.add_to_order(dish) # adds a dish to the order
   Receipt.view_order # returns the whole order and the total value
   Receipt.remove_dish(dish_name) # removes a dish from the order
 
@@ -48,67 +49,78 @@ The diagram below uses asciiflow.com but you could also use excalidraw.com, draw
 
 Also design the interface of each class in more detail.
 
-class Diary
-  def initialize
-    # starts with an empty array for todos
-    # starts with an empty array for contacts
+class Dish
+
+  def add(dish_name, dish_price)
+    # dish_name is a string
+    # dish_price is a float
+    # adds a dish and returns it as a hash
   end
   
-  add_todo
-    # adds a todo entry to list as text
+  def name
+    # returns the dish name
+  end
+  
+  def price
+    # returns the dish price
   end
 end
 
-class Todo
+class Menu
   def initialize
-    todo_list = []
+    menu_list = []
   end
-
-  def add_todo(todo_owner, todo_text)
-    # adds todo item to diary as hash
+  
+  def add(dish)
+    # adds a dish to the list (a hash within a list)
+  end
+  
+  def remove_dish(dish_name)
+    # removes a dish from the list
+  end
+  
+  def view_dish(dish_name)
+    # matches and returns a dish and the price (converted into a string)
+  end
+  
+  def view_all_dishes
+    # returns the list of hashes with all dishes
   end
   
 end
 
-class PhoneBook
+Class Receipt
   def initialize
-    contact_list = []
+    # initializes with an empty list
   end
   
-  def add_to_phonebook(contact_name, contact_number)
-    # adds contact name and number to contact_list
+  def add_to_order(dish)
+    # adds a dish to the list
   end
   
+  def view_order
+    # returns the list of dishes and calculates the total cost
+  end
 end
+
+  def remove_dish(dish_name)
+    # removes a dish from the list and returns the updated list
+  end
 
 3. Create Examples as Integration Tests
 Create examples of the classes being used together in different situations
 and combinations that reflect the ways in which the system will be used.
 
-#context - When at least one entry.
-  # before do
-  # end
+# Integration tests for Menu
+
 # 1 - Adds a todo.
   first_diary = Diary.new
   task_1 = ToDo.new("Paul Lazar","Go shop!"
   task_1.add_to_diary # => # ["Paul Lazar","Go shop!"]
   
-# 2 - Adds a contact person and number.
-  first_diary = Diary.new
-  contact_1 = PhoneBook.new("Paul Lazar","07802465000")
-  contact_1.add_to_phonebook # => ["Paul Lazar","07802465000"]
+# Integration tests for Receipt
 
-# 3 - Views all todo items.
-  first_diary = Diary.new
-  task_1 = ToDo.new("Paul Lazar","Go shop!")
-  task_2 = ToDo.new("Mary Jane","Go to the gym!"
-  first_diary.view_all_todos # => ["Paul Lazar","Go shop!", "Mary Jane","Go to the gym!]
-
-# 4 - Views all contacts (name and number).
-  first_diary = Diary.new
-  contact_1 = PhoneBook.new("Paul Lazar","07802465000")
-  contact_2 = PhoneBook.new("Alice Jones","07802465001")
-  first_diary.view_all_contacts # => ["Paul Lazar","07802465000", "Alice Jones","07802465001"]
+# 1 - 
 
 4. Create Examples as Unit Tests
 Create examples, where appropriate, of the behaviour of each relevant class 
@@ -118,11 +130,6 @@ at a more granular level of detail.
   todo_list1 = ToDo.new
   todo_list1.add_to_todo("Paul Lazar","Go shop!") # => # ["Paul Lazar","Go shop!"]
 
-# 2 - Selects and returns a specific todo.
-  todo_list1 = ToDo.new
-  todo_list_1.add_todo("Paul Lazar", "Go study")
-  todo_list_1.add_todo("Janice Jones", "Go shop")
-  todo_list1.view_todo("Paul Lazar") # => # ["Paul Lazar","Go shop!"]
 
 5. Implement the Behaviour
 After each test you write, follow the test-driving process of 
