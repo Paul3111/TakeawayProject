@@ -113,23 +113,101 @@ and combinations that reflect the ways in which the system will be used.
 
 # Integration tests for Menu
 
-# 1 - Adds a todo.
-  first_diary = Diary.new
-  task_1 = ToDo.new("Paul Lazar","Go shop!"
-  task_1.add_to_diary # => # ["Paul Lazar","Go shop!"]
+# 1 - Adds a dish to the menu.
+  menu1 = Menu.new
+  dish1 = Dish.new("Scallop soup", 5.5)
+  menu1.add(dish1) # => [{"Scallop soup" => 5.5}]
   
+# 2 - Remove a dish from a menu and update list
+  menu1 = Menu.new
+  dish1 = Dish.new("Scallop soup" => 5.5)
+  dish2 = Dish.new("Scampi soup" => 3.5)
+  dish3 = Dish.new("Fries" => 1.5)
+  menu1.add(dish1)
+  menu1.add(dish2)
+  menu1.add(dish3)
+  menu1.remove_dish("Scampi soup")
+  menu1.view_all_dishes # => [{"Scallop soup" => 5.5}, {"Fries" => 1.5}]
+  
+# 3 - Returns a selected dish
+  menu1 = Menu.new
+  dish1 = Dish.new("Scallop soup" => 5.5)
+  menu1.add(dish1)
+  menu1.view_dish # => [{"Scallop soup" => 5.5}]
+  
+# 4 - Returns all dishes in the list
+  menu1 = Menu.new
+  dish1 = Dish.new("Scallop soup" => 5.5)
+  dish2 = Dish.new("Scampi soup" => 3.5)
+  dish3 = Dish.new("Fries" => 1.5)
+  menu1.add(dish1)
+  menu1.add(dish2)
+  menu1.add(dish3)
+  menu1.view_all_dishes # => [{"Scallop soup" => 5.5}, {"Fries" => 1.5} {"Fries" => 1.5}]
+
 # Integration tests for Receipt
 
-# 1 - 
+# 1 - Adds dish to order and receipt
+  order1 - Receipt.new
+  dish1 = Dish.new("Scallop soup", 5.5)
+  order1.add_to_order(dish1)
+  order1.view_order # => [{"Scallop soup" => 5.5}, {"Total is £:" => 13.5}]
+
+# 2 - Removes a dish and returns the updated order and receipt
+  order1 - Receipt.new
+  dish1 = Dish.new("Scallop soup", 5.5)
+  dish2 = Dish.new("Scampi soup", 3.5)
+  dish3 = Dish.new("Fries", 1.5)
+  order1.add_to_order(dish1)
+  order1.add_to_order(dish2)
+  order1.add_to_order(dish3)
+  order1.remove_dish(dish2)
+  order1.view_order # => [{"Scallop soup" => 5.5}, {"Fries", 1.5} => {"Totals is £:"} => 7]
 
 4. Create Examples as Unit Tests
 Create examples, where appropriate, of the behaviour of each relevant class 
 at a more granular level of detail.
 
-# 1 - Adds a todo.
-  todo_list1 = ToDo.new
-  todo_list1.add_to_todo("Paul Lazar","Go shop!") # => # ["Paul Lazar","Go shop!"]
+# 1 - Adds a dish.
+  plate1 = Dish.new
+  plate1.add("Scallop soup", 5.5)
+  plate1.name # => "Scallop soup"
+  plate1.price # => 5.5
+  
+# 2 - Adds a dish to the menu list and returns it
+  menu1 = Menu.new
+  plate1 = Dish.new
+  plate1.add("Cauliflower soup", 2.5)
+  menu1.add(plate1)
+  menu1.view_dish("Cauliflower soup") # => "Cauliflower soup: £2.5"
 
+# 3 - Removes a dish and returns the updated list
+  menu1 = Menu.new
+  plate1 = Dish.new
+  plate2 = Dish.new
+  plate3 = Dish.new
+  plate1.add("Cauliflower soup", 2.5)
+  plate2.add("Fries", 1.5)
+  plate3.add("Ice cream", 1.5)
+  menu1.add(plate1)
+  menu1.add(plate2)
+  menu1.add(plate3)
+  menu1.remove_dish("Ice cream")
+  menu1.view_all_dishes # => [{"Cauliflower soup" => 2.5}, {"Fries" => 1.5}]
+
+# 4 - Adds dishes to receipt, removes one dish and returns the updated list
+  receipt1 = Receipt.new
+  plate1 = Dish.new
+  plate2 = Dish.new
+  plate3 = Dish.new
+  plate1.add("Cauliflower soup", 2.5)
+  plate2.add("Fries", 1.5)
+  plate3.add("Ice cream", 1.5)
+  receipt1.add(plate1)
+  receipt1.add(plate2)
+  receipt1.add(plate3)
+  receipt1.remove_dish("Ice cream")
+  receipt1.view_order # => [{"Cauliflower soup" => 2.5}, {"Fries" => 1.5}, {"Total is £:"} => 4]
 
 5. Implement the Behaviour
 After each test you write, follow the test-driving process of 

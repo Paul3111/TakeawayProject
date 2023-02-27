@@ -14,7 +14,7 @@ RSpec.describe Menu do
     expect(@menu1.view_dish("Cauliflower soup")).to eq "Cauliflower soup: £2.5"
   end
   
-  it "Adds a dish to the menu list and returns it." do
+  it "Adds multiple dishes to the menu list and returns the list." do
     @menu1.add(@dish1.add("Cauliflower soup", 2.5))
     @menu1.add(@dish2.add("Fish and chips", 4.5))
     @menu1.add(@dish3.add("British breakfast", 4.5))
